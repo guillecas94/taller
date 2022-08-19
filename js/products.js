@@ -17,7 +17,7 @@ function showProductsList(array){
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                         <div class="mb-1">
-                        <h4>`+ datosAutos.name +`</h4> 
+                        <h4>`+ datosAutos.name + `<span> - USD </span>` + datosAutos.cost +`</h4> 
                         <p> `+ datosAutos.description +`</p> 
                         </div>
                         <small class="text-muted">` + datosAutos.soldCount + ` artículos</small> 
