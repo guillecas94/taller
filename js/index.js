@@ -7,7 +7,7 @@ function login() {
     } else if(pass === ''){
         alert('Debe ingresar su Contraseña');
     } else {
-        sessionStorage.setItem('email',email)
+        localStorage.setItem('email',email)
         location.href='home.html';
     }
 }

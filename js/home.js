@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
-let usuario = sessionStorage.getItem('email');
+let usuario = localStorage.getItem('email');
 
 if (usuario !==null){
-    document.getElementById('email').innerHTML=usuario;
+    document.getElementById('usuario').innerHTML=usuario;
 }
 else{
     alert("Debe iniciar sesión")
