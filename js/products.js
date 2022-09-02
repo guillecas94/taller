@@ -3,6 +3,7 @@ let categoria = localStorage.getItem('catID')
 let productsArray = [];
 
 
+
 function showProductsList(array){
     let htmlContentToAppend = "";
 
@@ -39,8 +40,36 @@ let listaFiltrada = productsArray.filter(datos => datos.cost >= precioMin && dat
 }
 
 function limpiar(){
+    document.getElementById("precioMin").value = "";
+    document.getElementById("precioMax").value = "";
+
+    precioMin = undefined;
+    precioMax = undefined;
+
     showProductsList(productsArray);
 }
+
+function orderDesc (){
+    productsArray.sort((a,b) => {
+        return b.cost - a.cost;
+    })
+    showProductsList(productsArray);
+}
+    
+function orderAsc (){
+        productsArray.sort((a,b) => {
+            return   a.cost - b.cost;
+        })
+        showProductsList(productsArray);
+}
+function orderSoldCount (){
+    productsArray.sort((a,b) => {
+        return   b.soldCount - a.soldCount ;
+    })
+    showProductsList(productsArray);
+}
+    
+
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL + categoria + EXT_TYPE).then(function(resultObj){
@@ -52,11 +81,22 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
     document.getElementById('filtrar').addEventListener('click',()=>{
         filtrar();
-    })
+    });
 
     document.getElementById('limpiar').addEventListener('click',() =>{
         limpiar();
 
-    })
+    });
+    document.getElementById("minMax").addEventListener("click", () =>{
+        orderAsc();
+    });
+
+    document.getElementById("maxMin").addEventListener("click", () =>{
+      orderDesc();
+    });
+
+    document.getElementById("soldCount").addEventListener("click", () =>{
+        orderSoldCount();
+    });
    
 });
