@@ -10,7 +10,7 @@ function showProductsList(array){
     for(let i = 0; i < array.length; i++){ 
         let datos = array[i];
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProductId(${datos.id})" class="list-group-item list-group-item-action">
             <div class="row">
             <div class="col-3">
                     <img src="` + datos.image + `" alt="product image" class="img-thumbnail">
@@ -69,6 +69,11 @@ function orderSoldCount (){
     showProductsList(productsArray);
 }
     
+function setProductId(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html"
+}
+
 
 
 document.addEventListener("DOMContentLoaded", function(e){

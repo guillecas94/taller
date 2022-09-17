@@ -21,8 +21,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
+          
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link" href="home.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -40,11 +41,23 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
+    <div id="showProduct"></div><!-- Muestro Fetch Producto-->
+    <div id="showComents"></div><!-- Muestro Fetch Comentario-->
+    <div id="newComents"></div><!-- Agrego comentario sin guardarlo en ningun lado-->
+        <div class="container img-thumbnail">
+          <h3>Comentar</h3>
+          <div>
+                <label>Tu opinión</label>
+                <div class="form-group">
+                    <input name="Comentario" class="form-control" type="text-area" id="newComent" placeholder="Escribe aquí tu comentario:">
+                    <label>Tu Puntacion</label>
+                    <input name="Comentario" class="form-control" type="number" id="newScore" max="5" min="1" placeholder="Eliga su Calificacion del 1-5">
+                    <button class="mt-2 btn btn-primary my-3" id="btnAgrego">Agregar</button>
+              </div>
+              
+            
+          </div>
+         </div>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -67,6 +80,9 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
