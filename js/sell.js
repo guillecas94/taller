@@ -9,6 +9,16 @@ let PESO_SYMBOL = "UYU ";
 let PERCENTAGE_SYMBOL = '%';
 let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
+let usuario = localStorage.getItem('email');
+
+if (usuario !==null){
+    document.getElementById('usuario').innerHTML=usuario;
+}
+else{
+    alert("Debe iniciar sesión")
+    location.href='index.html'
+}
+
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts(){
     let unitProductCostHTML = document.getElementById("productCostText");

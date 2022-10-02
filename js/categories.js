@@ -5,6 +5,15 @@ let currentCategoriesArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
+let usuario = localStorage.getItem('email');
+
+if (usuario !==null){
+    document.getElementById('usuario').innerHTML=usuario;
+}
+else{
+    alert("Debe iniciar sesión")
+    location.href='index.html'
+}
 
 function sortCategories(criteria, array){
     let result = [];

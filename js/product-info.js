@@ -1,16 +1,23 @@
-const infoProducto = localStorage.getItem('productID');
-const comentarios = document.getElementById("showComents");
-const newComents = document.getElementById('newComents')
+let infoProducto = localStorage.getItem("productID");
 let infoProducts = [];
 let comentsProducts = [];
-let user = localStorage.getItem('email')
+let usuario = localStorage.getItem('email');
+
+if (usuario !==null){
+    document.getElementById('usuario').innerHTML=usuario;
+}
+else{
+    alert("Debe iniciar sesión")
+    location.href='index.html'
+}
+
+
 
 
 function mostrarProducto() {
-    let htmlContentToAppend = "";
+  let htmlContentToAppend = "";
 
-    htmlContentToAppend = 
-        `
+  htmlContentToAppend = `
         <div class="text-center p-4">
         <h2>${infoProducts.category}</h2>
           <h5>Verás aqui todos las Caracteristicas de ${infoProducts.name}</h5>
@@ -61,52 +68,55 @@ function mostrarProducto() {
           <span class="mb-1" style="font-weight:bold;">Categoria: </span>${infoProducts.category}<br>
           <span class="mb-1" style="font-weight:bold;">Cantidad vendidos: </span>${infoProducts.soldCount}
           </div></div></div></div></div><br>
-        `
-         document.getElementById("showProduct").innerHTML = htmlContentToAppend;
-
+        `;
+  document.getElementById("showProduct").innerHTML = htmlContentToAppend;
 }
 
-function mostrarComentarios(array){
+function mostrarComentarios(array) {
   let htmlContentToAppend = "";
 
-  for(let i = 0; i < array.length; i++){ 
-      let datos = array[i];
-      htmlContentToAppend += `
+  for (let i = 0; i < array.length; i++) {
+    let datos = array[i];
+    htmlContentToAppend += `
       <div class="container img-thumbnail">
       <div class="d-flex w-100 justify-content-between">
     <div class="mb-1">
-     <img src="/img/img_perfil.png" width=30> ${datos.user}</i> - <small class="text-muted"><i class="fas fa-clock"></i>${datos.dateTime}</small>
+     <img src="/img/img_perfil.png" width=30> ${
+       datos.user
+     }</i> - <small class="text-muted"><i class="fas fa-clock"></i>${
+      datos.dateTime
+    }</small>
       <p class="mb-1">${datos.description}</p>
       </div></div>
       ${puntuacion(datos.score)}
       
 		</div>
 	
-      `
-      showComents.innerHTML = htmlContentToAppend; 
+      `;
+    document.getElementById("showComents").innerHTML = htmlContentToAppend;
   }
 }
 
-function puntuacion(puntos){
-  let estrellas='';
-  for(let i=1; i<=5; i++){
-    if (i<=puntos){
+function puntuacion(puntos) {
+  let estrellas = "";
+  for (let i = 1; i <= 5; i++) {
+    if (i <= puntos) {
       estrellas += '<img src="/img/star.png" width=20>';
-    }else{
-      estrellas +='<img src="/img/starvacia.png" width=15>';
+    } else {
+      estrellas += '<img src="/img/starvacia.png" width=15>';
     }
   }
   return estrellas;
 }
 
-function AgregarComentario(){
-  let comentario= {}
-    comentario.newComent = document.getElementById('newComent').value;
-    comentario.newScore = document.getElementById('newScore').value;
-    let today = new Date();
-    let now = today.toLocaleString();
-    let htmlContentToAppend = "";
-    htmlContentToAppend += `
+function AgregarComentario() {
+  let comentario = {};
+  comentario.newComent = document.getElementById("newComent").value;
+  comentario.newScore = document.getElementById("newScore").value;
+  let today = new Date();
+  let now = today.toLocaleString();
+  let htmlContentToAppend = "";
+  htmlContentToAppend += `
       <div class="container img-thumbnail">
       <div class="d-flex w-100 justify-content-between">
     <div class="mb-1">
@@ -117,39 +127,70 @@ function AgregarComentario(){
       
 		</div>
 	
-      `
-      newComents.innerHTML = htmlContentToAppend;
-      document.getElementById('newComent').value="";
-      document.getElementById('newScore').value="";
+      `;
+  document.getElementById("newComents").innerHTML = htmlContentToAppend;
+  document.getElementById("newComent").value = "";
+  document.getElementById("newScore").value = "";
 }
 
+function mostrarProdRelacionados() {
+  let htmlContentToAppend = ` <br><h4>Productos Relacionados:</h4> <hr><br>`;
 
+  for (let relacionado of infoProducts.relatedProducts) {
+    htmlContentToAppend += `     
+               <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="${relacionado.image}">
+  <div class="card-body">
+    <p class="card-text">${relacionado.name}</p>
+    <button class="mt-2 btn btn-primary my-3"onclick= setProductId(${relacionado.id})>Mas detalles</button>
+  </div></div>
 
-document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCT_INFO_URL + infoProducto + EXT_TYPE).then(function(resultObj){
-        if (resultObj.status === "ok"){
-            infoProducts = resultObj.data
-            mostrarProducto(infoProducts)
-   
+          <br> 
+         `;
 
-        }
-    });
-    getJSONData(PRODUCT_INFO_COMMENTS_URL + infoProducto + EXT_TYPE).then(function(resultObj){
-      if (resultObj.status === "ok"){
-          comentsProducts = resultObj.data
-          mostrarComentarios(comentsProducts)
-          //console.log(comentsProducts)
+    document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
+  }
+}
 
-      }
+function setProductId(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html";
+}
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  getJSONData(PRODUCT_INFO_URL + infoProducto + EXT_TYPE).then(function (
+    resultObj
+  ) {
+    if (resultObj.status === "ok") {
+      infoProducts = resultObj.data;
+      mostrarProducto(infoProducts);
+      mostrarProdRelacionados(infoProducts.relatedProducts);
+      //console.log(infoProducts.relatedProducts)
+    }
   });
-  
+  getJSONData(PRODUCT_INFO_COMMENTS_URL + infoProducto + EXT_TYPE).then(
+    function (resultObj) {
+      if (resultObj.status === "ok") {
+        comentsProducts = resultObj.data;
+        mostrarComentarios(comentsProducts);
+        //console.log(comentsProducts)
+      }
+    }
+  );
 });
 
-document.getElementById("btnAgrego").addEventListener("click", function(){
- AgregarComentario()
-  
-  
+document.getElementById("btnAgrego").addEventListener("click", function () {
+  AgregarComentario();
 });
+
+
+
+
+
+
+
+
+
 
 /*Falta modificar fecha para que quede igual a los tomados del json
 Falta controlar que el usuario este logeado antes de comentar
