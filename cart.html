@@ -47,13 +47,76 @@
       </div>
     </div>
   </nav>
+
+
+
+
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col"></th>
+            <th class="col">Nombre</th>
+            <th class="col">Costo</th>
+            <th class="col">Cantidad</th>
+            <th class="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="tabla"></tbody>
+      </table>
+
+
+      <h4>Tipo de envío</h4>
+      <div class="container img-thumbnail">
+        <div class="d-flex">
+          <input class="form-check-input me-2 p-0" type="radio" name="envio" value="a"/>
+          <p>Premium 2 a 5 dias (15%)</p>
+        </div>
+        <div class="d-flex">
+          <input class="form-check-input me-2 p-0" type="radio" name="envio" value="b"/>
+          <p>Express 5 a 8 dias (7%)</p>
+        </div>
+        <div class="d-flex">
+          <input class="form-check-input me-2 p-0" type="radio" name="envio" value="c"/>
+          <p>Standard 12 a 15 dias (5%)</p>
+        </div>
       </div>
+
+      <h4 class="my-4">Direccion de envio</h4>
+      <div class="d-flex">
+        <div>
+          <label for="calle" class="form-label">Calle</label>
+          <div class="mb-3">
+            <input type="text" class="form-control me-4" id="calle" style="width: 25rem"/>
+          </div>
+        </div>
+        <div>
+          <label for="numero" class="form-label">Numero</label>
+          <div class="mb-3">
+          <input type="text" class="form-control" id="numero"/>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div>
+          <label for="calle" class="form-label">Esquina</label>
+          <div class="mb-3">
+            <input type="text" class="form-control me-4" id="calle" style="width: 25rem"/>
+          </div>
+        </div>
+      </div>
+      <hr/>
     </div>
   </main>
+
+
+
+
+
+
+
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
