@@ -1,4 +1,4 @@
-let infoProducto = localStorage.getItem("productID");
+let infoProducto = localStorage.getItem('productID');
 let infoProducts = [];
 let comentsProducts = [];
 let usuario = localStorage.getItem('email');
@@ -120,7 +120,7 @@ function AgregarComentario() {
       <div class="container img-thumbnail">
       <div class="d-flex w-100 justify-content-between">
     <div class="mb-1">
-     <img src="/img/img_perfil.png" width=30> ${user}</i> - <small class="text-muted"><i class="fas fa-clock"></i>${now}</small>
+     <img src="/img/img_perfil.png" width=30> ${usuario}</i> - <small class="text-muted"><i class="fas fa-clock"></i>${now}</small>
       <p class="mb-1">${comentario.newComent}</p>
       </div></div>
       ${puntuacion(comentario.newScore)}
